@@ -2,9 +2,10 @@ package com.viva.demo.service;
 
 import com.viva.demo.dao.JdbcProductTypeDao;
 import com.viva.demo.model.ProductType;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public class ProductTypeService {
 
     private JdbcProductTypeDao jdbcProductTypeDao;

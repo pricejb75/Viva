@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 
 @RestController
-@RequestMapping("/products")
+@CrossOrigin
+@RequestMapping("/api/products")
 public class ProductController {
 
     private ProductService productService;
@@ -16,7 +17,6 @@ public class ProductController {
         this.productService = productService;
     }
 
-    // localhost:8888/products?type=1&qualityDetail=red
     @GetMapping
     public Object getAllProducts(
             @RequestParam(defaultValue = "true") Boolean withLinks,
@@ -36,46 +36,6 @@ public class ProductController {
         return productService.getProductByProductId(id, withLinks);
     }
 
-//    @GetMapping(path = "/country/{id}")
-//    public Object getProductsByCountryId(
-//            @RequestParam(defaultValue = "true") Boolean withLinks,
-//            @PathVariable int id) {
-//        if (withLinks) {
-//            return productService.getProductsWithLinksByCountryId(id);
-//        }
-//        return productService.getProductsByCountryId(id);
-//    }
-//
-//    @GetMapping(path = "/type/{id}")
-//    public Object getProductsByProductTypeId(
-//            @RequestParam(defaultValue = "true") Boolean withLinks,
-//            @PathVariable int id) {
-//        if (withLinks) {
-//            return productService.getProductsWithLinksByTypeId(id);
-//        }
-//        return productService.getProductsByProductTypeId(id);
-//    }
-//
-//    @GetMapping(path = "/qualityDetail")
-//    public Object getProductsByQualityDetail(
-//            @RequestParam(defaultValue = "true") Boolean withLinks,
-//            @RequestParam String qualityDetail) {
-//        if (withLinks) {
-//            return productService.getProductsWithLinksByQualityDetail(qualityDetail);
-//        }
-//        return productService.getProductsByQualityDetail(qualityDetail);
-//    }
-//
-//    @GetMapping(path = "/price")
-//    public Object getProductsByPrice(
-//            @RequestParam(defaultValue = "true") Boolean withLinks,
-//            @RequestParam(defaultValue = "0") int lowEnd,
-//            @RequestParam(required = true) int highEnd) {
-//        if (withLinks) {
-//            return productService.getProductsWithLinksByPrice(lowEnd, highEnd);
-//        }
-//        return productService.getProductsByPrice(lowEnd, highEnd);
-//    }
 
 
 }
