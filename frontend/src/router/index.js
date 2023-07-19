@@ -7,6 +7,8 @@ import Food from '../views/Food.vue';
 import Countries from '../views/Countries.vue';
 import Country from '../views/Country.vue';
 import Product from '../views/Product.vue';
+import Cart from '../views/Cart.vue';
+import Login from '../views/Login.vue';
 
 
 // Here we're specifying that VUE should use VUE router
@@ -33,7 +35,9 @@ const routes = [
     {path: '/food', component: Food, name: 'food'},
     {path: '/countries', component: Countries, name: 'countries'},
     {path: '/country/:id', component: Country, name: 'country'},
-    {path: '/product/:id', component: Product, name: 'product'}
+    {path: '/product/:id', component: Product, name: 'product'},
+    {path: '/cart', component: Cart, name: 'cart'},
+    {path: '/login', component: Login, name: 'login'}
   ];
   
 

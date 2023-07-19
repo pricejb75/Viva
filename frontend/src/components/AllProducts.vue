@@ -14,7 +14,7 @@
                     <button title="add-to-cart">Add To Cart 🛒</button>
                 </div>
             </article>
-        <router-link/>
+        </router-link>
 
 
 
