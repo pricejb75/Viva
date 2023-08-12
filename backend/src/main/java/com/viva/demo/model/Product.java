@@ -14,8 +14,7 @@ public class Product extends ProductBase {
         this.productType = productType;
     }
 
-    public Product() {
-    }
+    public Product() {}
 
 
     public int getCountryId() {

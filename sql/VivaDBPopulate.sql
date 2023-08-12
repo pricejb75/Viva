@@ -15,7 +15,7 @@ drop table country;
 CREATE TABLE users (
 	user_id SERIAL,
 	username varchar(50) NOT NULL UNIQUE,
-	password_hash varchar(200) NOT NULL,
+	password varchar(200) NOT NULL,
 	role varchar(50) NOT NULL,
 	name varchar(50) NOT NULL,
 	address varchar(100) NULL,

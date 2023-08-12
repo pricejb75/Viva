@@ -151,6 +151,18 @@ public class JdbcProductDao implements ProductDao {
         return products;
     }
 
+    @Override
+    public List<Product> getProductsInUserCart(int userId) {
+        List<Product> list = new ArrayList<>();
+        String sql = "SELECT * FROM product WHERE product_id IN (SELECT product_id FROM cart_item WHERE user_id = ?)";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        while (results.next()) {
+            Product product = mapRowToProduct(results);
+            list.add(product);
+        }
+        return list;
+    }
+
 
     private Product mapRowToProduct(SqlRowSet results) {
         Product product = new Product();
