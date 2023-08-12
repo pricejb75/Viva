@@ -11,8 +11,7 @@ public class ProductBase {
     private int inventory;
 
 
-    public ProductBase() {
-    }
+    public ProductBase() {}
 
     public ProductBase(int id, String name, String description, BigDecimal price, int inventory) {
         this.id = id;

@@ -1,20 +1,32 @@
 <template>
 
     <div id="product-cards">
+
+
         <div v-for="product in products" v-bind:key="product.id" class="product-card">
+
             <router-link :to="{ name : 'product', params: {id : product.id}}">
+
                 <div class="product-name action" v-bind:data-id="product.id">
                     {{ product.name }}
                 </div>
+
                 <div class="price"> {{ product.price }} </div>
+
                 <div class="product-image-div">
                     <img height="100" width="100" class="product-image" v-bind:src="getPicturePath(product.id)"/>  
                 </div>
+
+
             </router-link>
+
+
             <div class="add-to-cart" v-if="isAuthenticated()">
                     <button @click="addToCart(product)" title="add-to-cart">Add To Cart 🛒</button>
             </div>
         </div>
+
+
     </div>
 
 </template>
@@ -31,8 +43,8 @@
     },
     name: "ProductCards",
     components: {
-        PictureService,
-        CartService
+        // PictureService,
+        // CartService
     },
     methods: {
         isAuthenticated() {

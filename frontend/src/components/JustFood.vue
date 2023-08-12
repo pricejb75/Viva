@@ -1,4 +1,5 @@
 <template>
+
     <div id="product-cards">
         <router-link :to="{ name : 'product', params: {id : product.id}}" v-for="product in products" v-bind:key="product.id" class="product-card">
             <article id="product-card"  >
@@ -15,6 +16,7 @@
             </article>
         </router-link>
     </div>
+    
 </template>
 
 <script>

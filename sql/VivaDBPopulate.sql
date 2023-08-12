@@ -12,9 +12,6 @@ drop table country;
 
 
 
-
-
-
 CREATE TABLE users (
 	user_id SERIAL,
 	username varchar(50) NOT NULL UNIQUE,
@@ -127,10 +124,6 @@ CREATE TABLE cart_item (
 	CONSTRAINT FK_cart_item_product FOREIGN KEY (product_id) REFERENCES product(product_id)
 );
 CREATE UNIQUE INDEX IX_cart_item_user_product ON cart_item(user_id, product_id);
-
-
-
-
 
 
 

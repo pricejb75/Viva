@@ -1,5 +1,5 @@
 <template>
-
+<div>
     <p id="login-message" v-if="!isLoggedIn">
       Welcome! You may browse anonymously as much as you wish,<br />
       but you must
@@ -10,6 +10,8 @@
     <input type="text" @keyup="getProductsByName" v-model="productName" > 
 
     <product-cards :products="products"/>
+
+  </div>
 
 </template>
 
