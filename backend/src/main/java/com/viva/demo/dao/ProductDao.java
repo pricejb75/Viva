@@ -19,4 +19,7 @@ public interface ProductDao {
     List<Product> getProductsByPrice(int lowEnd, int highEnd);
 
     List<Product> getProductsInUserCart(int userId);
+
+    List<Product> getProductsInWishlist(int wishlistId);
+
 }

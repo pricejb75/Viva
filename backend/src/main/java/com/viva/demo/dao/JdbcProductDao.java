@@ -163,6 +163,21 @@ public class JdbcProductDao implements ProductDao {
         return list;
     }
 
+    @Override
+    public List<Product> getProductsInWishlist(int wishlistId) {
+            List<Product> list = new ArrayList<>();
+            String sql = "SELECT * FROM product " +
+                    "WHERE product_id IN " +
+                    "(SELECT product_id FROM wishlist_item WHERE wishlist_id = ?)";
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, wishlistId);
+            while (results.next()) {
+                Product product = mapRowToProduct(results);
+                list.add(product);
+            }
+            return list;
+        }
+    }
+
 
     private Product mapRowToProduct(SqlRowSet results) {
         Product product = new Product();
