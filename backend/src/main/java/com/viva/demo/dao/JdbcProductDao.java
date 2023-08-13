@@ -176,7 +176,7 @@ public class JdbcProductDao implements ProductDao {
             }
             return list;
         }
-    }
+
 
 
     private Product mapRowToProduct(SqlRowSet results) {
