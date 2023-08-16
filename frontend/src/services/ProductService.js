@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 export default {
+
+
     getAllProducts(params){
         let p = params;
         p.withLinks = params.withLinks ?? '';
@@ -36,5 +38,13 @@ export default {
 
         return axios.get(path);
         
+    },
+
+
+    getProductByProductId(id){
+        let path = '/api/products/' + id;
+
+        return axios.get(path);
+
     }
 } 
