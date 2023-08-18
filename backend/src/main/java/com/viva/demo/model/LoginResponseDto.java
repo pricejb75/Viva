@@ -1,37 +1,34 @@
 package com.viva.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.viva.demo.enums.LoginResult;
 
 public class LoginResponseDto {
 
+    private int id;
+    private String username;
+    private LoginResult loginResult;
 
-    private String token;
-    private User user;
-
-    public LoginResponseDto(String token, User user) {
-        this.token = token;
-        this.user = user;
+    public int getId() {
+        return id;
     }
 
-    @JsonProperty("token")
-    String getToken() {
-        return token;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    void setToken(String token) {
-        this.token = token;
+    public String getUsername() {
+        return username;
     }
 
-    @JsonProperty("user")
-    public User getUser() {
-        return user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public LoginResult getLoginResult() {
+        return loginResult;
     }
 
-
-
-
+    public void setLoginResult(LoginResult loginResult) {
+        this.loginResult = loginResult;
+    }
 }

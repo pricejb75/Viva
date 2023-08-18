@@ -11,6 +11,12 @@ import java.util.List;
 @RequestMapping("/api/pictures")
 public class PictureController {
 
+//    @Value("${server.port}")
+//    private int port;
+//
+//    @Value("${server.host")
+//    private String host;
+
     private PictureService pictureService;
 
     public PictureController(PictureService pictureService) {
@@ -19,7 +25,7 @@ public class PictureController {
 
     @GetMapping
     public List<Picture> getAllPictures(){
-        return pictureService.getAllPictures();
+        return this.pictureService.getAllPictures("http://localhost:8081/images/");
     }
 
     @GetMapping(path = "/{id}")

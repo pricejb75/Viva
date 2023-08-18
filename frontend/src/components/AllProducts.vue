@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import ProductService from '../services/ProductService.js';
+import PictureService from '../services/PictureService.js';
 export default {
     data() {
         return {
@@ -32,24 +34,28 @@ export default {
         }
     },
     methods: {
-        async getProducts() {
-            const res = await fetch("/api/products");
-            this.products = await res.json();
+        
+        getProducts(){
+            ProductService.getAllProducts().then((response) => {
+                this.products = response.data;
+            })
         },
 
-        async getPictures() {
-            const res = await fetch("/api/pictures");
-            this.pictures = await res.json();
+        getPictures(){
+            PictureService.getAllPictures().then((response) => {
+                this.pictures = response.data;
+            })
         },
 
         getPicturePath(productId) {
             return this.pictures.filter(p => p.productId === productId)[0].filepath;
         }
     },
-    mounted() {
-        this.getProducts(),
-        this.getPictures()
+    created() {
+        this.getProducts();
+        this.getPictures();
     }
+
 };
 </script>
 

@@ -15,5 +15,13 @@ public class PictureService {
 
     public List<Picture>getAllPictures(){ return jdbcPictureDao.getAll();}
 
+    public List<Picture> getAllPictures(String prependPath) {
+        List<Picture> pictures = jdbcPictureDao.getAll();
+        for (Picture picture : pictures) {
+            picture.setFilepath(prependPath + picture.getFilepath());
+        }
+        return pictures;
+    }
+
     public Picture getPictureById(int id) {return jdbcPictureDao.getByPictureId(id);}
 }

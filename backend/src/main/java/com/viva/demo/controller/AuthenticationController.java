@@ -1,22 +1,33 @@
 package com.viva.demo.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
+import com.viva.demo.enums.LoginResult;
+import com.viva.demo.model.LoginDto;
+import com.viva.demo.model.LoginResponseDto;
+import com.viva.demo.service.AuthenticationService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/api/authentication")
 public class AuthenticationController {
 
-    /*
-    TO D0 -
-        This class should call the method defined in the Authentication Service class called validateUser()
 
-        if 1 is returned -> Properties of User stored in Vuex Data Store and user is taken into website
-        they can see shopping cart icons, add items to wishlist, and add items to cart
+    private AuthenticationService authenticationService;
 
-        if 2 is returned -> They recieve a message like "Username is correct but wrong password."
 
-        if 3 is returned -> they get "There is no user matching entry in our database"
-     */
+    @PostMapping
+    public ResponseEntity<LoginResponseDto> authenticateUser (@RequestBody LoginDto loginDto){
+       LoginResponseDto loginResponseDto =
+               authenticationService.validateUser(loginDto.getUsername(),loginDto.getPassword());
+       if (loginResponseDto.getLoginResult() == LoginResult.SUCCESS) {
+           return new ResponseEntity<>(loginResponseDto, HttpStatus.OK);
+       }
+
+       return new ResponseEntity<>(loginResponseDto, HttpStatus.UNAUTHORIZED);
+
+    }
+
 
 }

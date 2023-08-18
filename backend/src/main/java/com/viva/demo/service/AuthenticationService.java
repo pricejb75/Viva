@@ -1,7 +1,9 @@
 package com.viva.demo.service;
 
 import com.viva.demo.dao.JdbcUserDao;
+import com.viva.demo.enums.LoginResult;
 import com.viva.demo.model.User;
+import com.viva.demo.model.LoginResponseDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -33,16 +35,21 @@ public class AuthenticationService {
         return jdbcUserDao.create(newUser);
     }
 
-    public int validateUser(String username, String password) {
+    public LoginResponseDto validateUser(String username, String password) {
+        LoginResponseDto validationDto = new LoginResponseDto();
         User user = jdbcUserDao.findByUsername(username);
          if (user != null && user.getPassword().equals(password)) {
-             return 1;
+             validationDto.setUsername(user.getUsername());
+             validationDto.setId(user.getId());
+             validationDto.setLoginResult(LoginResult.SUCCESS);
          }
          if (user != null && !user.getPassword().equals(password)) {
-             return 2;
+             validationDto.setLoginResult(LoginResult.BAD_PASSWORD);
          } else {
-             return 3;
+             validationDto.setLoginResult(LoginResult.USER_DOES_NOT_EXIST);
          }
+
+         return validationDto;
     }
 
 
