@@ -9,7 +9,7 @@
     
         <input type="text" @keyup="getProductsByName" v-model="productName" > 
     
-        <product-cards :products="products"/>
+        <product-cards :products="filteredProducts"/>
     
       </div>
     
@@ -19,14 +19,15 @@
     import ProductService from "../services/ProductService.js";
     import ProductCards from "../components/ProductCards.vue";
     export default {
-      name: "ProductsView",
+      name: "FoodView",
       components: {
         ProductCards
       },
       data() {
         return {
           products: [],
-          productName : ''
+          productName : '',
+          filteredProducts : []
         };
     
       },
@@ -41,16 +42,16 @@
     
         getProductsByName(name){
               name = this.productName.toLowerCase();
-              let filteredProducts = this.products.filter(p => {
-                return p.name.toLowerCase.includes(name);
+              this.filteredProducts = this.products.filter(p => {
+                return p.name.toLowerCase().includes(name);
               })
-              this.products = filteredProducts;
           }
       },
     
       created() {
         ProductService.getFood().then(response => {
           this.products = response.data;
+          this.filteredProducts = this.products;
         })
       },
     };

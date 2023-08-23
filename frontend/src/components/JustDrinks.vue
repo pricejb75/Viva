@@ -19,7 +19,7 @@
   import ProductService from "../services/ProductService.js";
   import ProductCards from "../components/ProductCards.vue";
   export default {
-    name: "ProductsView",
+    name: "DrinksView",
     components: {
       ProductCards
     },

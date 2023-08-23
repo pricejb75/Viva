@@ -1,11 +1,16 @@
 <template>
 
+    <div>
+
+        <input type="text" @keyup="getCountriesByName" v-model="countryName" > 
 
     <ul id="country-names">
         <router-link :to="{ name : 'country', params: {id : country.id}}" v-for="country in countries" v-bind:key="country.id">
         <li id="country-name" >{{ country.name }}</li>
         </router-link>
     </ul>
+
+    </div>
 
 
 
@@ -20,21 +25,23 @@ export default {
     data() {
         return {
             countries: [],
-            countryName: ''
-        }
+            countryName: '',
+            filteredCountries: []
+        };
     },
-    getCountryByName(name){
+    methods : {
+    getCountriesByName(name){
               name = this.countryName.toLowerCase();
-              let filteredCountries = this.countries.filter(c => {
-                return c.name.toLowerCase.includes(name);
+               this.filteredCountries = this.countries.filter(c => {
+                return c.name.toLowerCase().includes(name);
               })
-              this.countries = filteredCountries;
-       
-      },
+      }
+    },
     
       created() {
         CountryService.getCountries().then(response => {
           this.countries = response.data;
+          this.filteredCountries = this.countries;
         })
       },
 };
