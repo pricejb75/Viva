@@ -1,50 +1,51 @@
 <template>
-    <div id="product-cards">
-        <router-link :to="{ name : 'product', params: {id : product.id}}" v-for="product in products" v-bind:key="product.id" class="product-card">
-            <article id="product-card"  >
-                <div class="product-name action" v-bind:data-id="product.productId">
-                    {{ product.name }}
-                </div>
-                <div class="price"> {{ product.price }} </div>
-                <div class="product-image-div">
-                    <img height="100" width="100" class="product-image" v-bind:src="getPicturePath(product.id)"/>  <!-- v-bind:src="product.image.path"-->
-                </div>
-                <div class="add-to-cart">
-                    <button title="add-to-cart">Add To Cart 🛒</button>
-                </div>
-            </article>
-        </router-link>
+  <div>
+      <!-- <p id="login-message" v-if="!isLoggedIn">
+        Welcome! You may browse anonymously as much as you wish,<br />
+        but you must
+        <router-link v-bind:to="{ name: 'login' }">Login</router-link> to add
+        items to your shopping cart.
+      </p> -->
+  
+      <input type="text" @keyup="getProductsByName" v-model="productName" > 
+  
+      <product-cards :products="products"/>
+  
     </div>
 </template>
 
 <script>
+  import ProductService from "../services/ProductService.js";
+  import ProductCards from "../components/ProductCards.vue";
 export default {
+    name: "ProductsByCountry",
+        components: {
+            ProductCards
+        },
     data() {
         return {
             products: [],
-            pictures: []
+            productName: ''
         }
+    },
+    computed: {
+      // isLoggedIn() {
+      //   return this.$store.state.token.length > 0;
+      // },
     },
     methods: {
-        async getProducts() {
-            const res = await fetch(
-                "/api/products?country=" +  this.$route.params.id
-                );
-            this.products = await res.json();
-        },
-
-        async getPictures() {
-            const res = await fetch("/api/pictures");
-            this.pictures = await res.json();
-        },
-
-        getPicturePath(productId) {
-            return this.pictures.filter(p => p.productId === productId)[0].filepath;
+        getProductsByName(name){
+            name = this.productName.toLowerCase();
+            let filteredProducts = this.products.filter(p => {
+              return p.name.toLowerCase.includes(name);
+            })
+            this.products = filteredProducts;
         }
     },
-    mounted() {
-        this.getProducts(),
-        this.getPictures()
+    created() {
+        ProductService.getProductsByCountryId(this.$route.params.id).then(response => {
+            this.products = response.data;
+        })
     }
 };
 </script>

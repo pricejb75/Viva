@@ -4,10 +4,11 @@
 
     <h1 class="product-name action"> {{ product.name }}</h1>
     <h2 class="price"> {{ product.price }}</h2>
+
     <div class="product-image-div">
-        <img height="100" width="100" class="product-image"
-         v-bind:src="picture.filepath"/>  
+        <img height="100" width="100" class="product-image" :src="'http://localhost:8081/images' + picture.filepath"/>  
     </div>
+
     <h3 class="description">{{ product.description }}</h3>
     <div class="add-to-cart">
         <button title="add-to-cart">Add To Cart 🛒</button>
@@ -18,33 +19,47 @@
 </template>
 
 <script>
+import CartService from "../services/CartService";
+import ProductService from "../services/ProductService.js";
+import PictureService from "../services/PictureService";
 export default {
     data() {
         return {
             product: {},
-            picture: {}
+            picture: {},
+
         }
     },
     methods: {
-        async getProduct() {
-            const res = await fetch(
-                "/api/products/" +  this.$route.params.id
-                );
-            this.product = await res.json();
+         getProduct() {
+            ProductService.getProductByProductId(this.$route.params.id).then(response => {
+                this.product = response.data;
+            })
         },
 
-        async getPicture() {
-            const res = await fetch(
-                "/api/pictures/" + this.$route.params.id
-                );
-            this.picture = await res.json();
+             // isAuthenticated() {
+        //     return this.$store.state.token !== "";
+        // },
+
+        addToCart(product) {
+            CartService.addCartItem(product).then(response => {
+                console.log("Item Was Added To Cart!", response);
+            });
+        },
+
+        getPicture(){
+            PictureService.getPictureById(this.$route.params.id).then(response => {
+                this.picture = response.data;
+            })
         }
+
+      
 
 
     },
-    mounted() {
-        this.getProduct(),
-        this.getPicture()
+    created() {
+        this.getPicture(),
+        this.getProduct()
     }
 };
 </script>

@@ -14,22 +14,29 @@
 </template>
 
 <script>
+import CountryService from '../services/CountryService';
+
 export default {
     data() {
         return {
-            countries: []
+            countries: [],
+            countryName: ''
         }
     },
-    methods: {
-        async getCountries() {
-            const res = await fetch("/api/countries");
-            this.countries = await res.json();
-        },
-
-    },
-    mounted() {
-        this.getCountries()
-    }
+    getCountryByName(name){
+              name = this.countryName.toLowerCase();
+              let filteredCountries = this.countries.filter(c => {
+                return c.name.toLowerCase.includes(name);
+              })
+              this.countries = filteredCountries;
+       
+      },
+    
+      created() {
+        CountryService.getCountries().then(response => {
+          this.countries = response.data;
+        })
+      },
 };
 </script>
 

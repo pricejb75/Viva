@@ -2,15 +2,13 @@ package com.viva.demo.controller;
 
 import com.viva.demo.model.Country;
 import com.viva.demo.service.CountryService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/countries")
+@CrossOrigin
 public class CountryController {
 
     private CountryService countryService;

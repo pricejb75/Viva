@@ -46,5 +46,24 @@ export default {
 
         return axios.get(path);
 
+    },
+
+    getDrinks(){
+        return axios.get('http://localhost:8081/api/products?type=2');
+    },
+
+     getFood(){
+        return axios.get('http://localhost:8081/api/products?type=1');
+    },
+
+    getProductsByCountryId(id){
+        return axios.get('http://localhost:8081/api/products?country=' + id);
     }
+
+
+
+
+
+
+    
 } 

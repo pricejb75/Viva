@@ -21,7 +21,7 @@ import ProductCards from "../components/ProductCards.vue";
 export default {
   name: "ProductsView",
   components: {
-    ProductCards,
+    ProductCards
   },
   data() {
     return {
@@ -38,11 +38,14 @@ export default {
   },
 
   methods: {
-    getProductsByName(){
-      ProductService.getAllProducts(this.productName).then(response => {
-        this.products = response.data;
-      })
-    }
+
+    getProductsByName(name){
+          name = this.productName.toLowerCase();
+          let filteredProducts = this.products.filter(p => {
+            return p.name.toLowerCase.includes(name);
+          })
+          this.products = filteredProducts;
+      }
   },
 
   created() {
