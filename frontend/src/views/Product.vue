@@ -39,7 +39,7 @@ export default {
         },
 
              // isAuthenticated() {
-        //     return this.$store.state.token !== "";
+        //     return this.$store.state.user.username !== "";
         // },
 
         addToCart() {
