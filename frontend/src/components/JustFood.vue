@@ -1,12 +1,11 @@
 <template>
     <div>
-        <!-- <p id="login-message" v-if="!isLoggedIn">
+       <!-- <p id="login-message" v-if="!isLoggedIn">
           Welcome! You may browse anonymously as much as you wish,<br />
           but you must
           <router-link v-bind:to="{ name: 'login' }">Login</router-link> to add
           items to your shopping cart.
-        </p> -->
-    
+        </p>  -->
         <input type="text" @keyup="getProductsByName" v-model="productName" > 
     
         <product-cards :products="filteredProducts"/>

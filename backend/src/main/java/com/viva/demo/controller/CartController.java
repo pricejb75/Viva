@@ -10,7 +10,7 @@ import java.security.Principal;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/cart")
+@RequestMapping("/api/cart")
 public class CartController {
 
     private CartService cartService;

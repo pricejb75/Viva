@@ -11,7 +11,7 @@
 
     <h3 class="description">{{ product.description }}</h3>
     <div class="add-to-cart">
-        <button title="add-to-cart">Add To Cart 🛒</button>
+        <button @click="addToCart" title="add-to-cart">Add To Cart 🛒</button>
     </div>
 
   </section>
@@ -27,6 +27,7 @@ export default {
         return {
             product: {},
             picture: {},
+          
 
         }
     },
@@ -41,8 +42,8 @@ export default {
         //     return this.$store.state.token !== "";
         // },
 
-        addToCart(product) {
-            CartService.addCartItem(product).then(response => {
+        addToCart() {
+            CartService.addCartItem(this.product).then(response => {
                 console.log("Item Was Added To Cart!", response);
             });
         },

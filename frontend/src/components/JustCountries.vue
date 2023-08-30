@@ -5,7 +5,7 @@
         <input type="text" @keyup="getCountriesByName" v-model="countryName" > 
 
     <ul id="country-names">
-        <router-link :to="{ name : 'country', params: {id : country.id}}" v-for="country in countries" v-bind:key="country.id">
+        <router-link :to="{ name : 'country', params: {id : country.id}}" v-for="country in filteredCountries" v-bind:key="country.id">
         <li id="country-name" >{{ country.name }}</li>
         </router-link>
     </ul>

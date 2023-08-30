@@ -11,5 +11,9 @@ export default {
 
     getCartItems() {
         return axios.get('/cart');
+    },
+
+    removeCartItem(itemId) {
+        return axios.delete('/cart/items/' + itemId);
     }
 }

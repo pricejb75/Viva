@@ -21,9 +21,9 @@
             </router-link>
 
 
-            <!-- <div class="add-to-cart" v-if="isAuthenticated()">
+             <!-- <div class="add-to-cart" v-if="isAuthenticated()">
                     <button @click="addToCart(product)" title="add-to-cart">Add To Cart 🛒</button>
-            </div> -->
+            </div>   -->
         </div>
 
 
@@ -47,11 +47,11 @@
         // CartService
     },
     methods: {
-        // isAuthenticated() {
-        //     return this.$store.state.token !== "";
-        // },
-        addToCart(product) {
-            CartService.addCartItem(product).then(response => {
+        isAuthenticated() {
+            return this.$store.state.user.username !== "";
+        },
+        addToCart() {
+            CartService.addCartItem(this.product).then(response => {
                 console.log("Item Was Added To Cart!", response);
             });
         },
