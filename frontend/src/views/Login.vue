@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div id="login">
 
       <form v-on:submit.prevent="login">
@@ -78,15 +78,15 @@
   
   <style scoped>
   
-  </style>
+  </style> -->
 
-<!-- <template>
+ <template>
 
   <div id="login">
 
     <div id="display-box">{{ response }}</div>
 
-    <form v-on:submit.prevent="login">
+    <form v-on:submit.prevent="authenticateUser">
 
       <h1>Please Sign In</h1>
 
@@ -109,7 +109,7 @@
             type="password"
             id="password"
             placeholder="Password"
-            v-model="user.password"
+            v-model="loginDto.password"
             required
           />
 
@@ -146,11 +146,20 @@ export default {
       authService
         .authenticateUser(this.loginDto)
         .then((response) => {
-          if (response.loginResponseDto.loginResult.eqals('SUCCESS')) {
-            this.$store.commit("SET_USER", response.data);
+          if (response.data.loginResult == 'SUCCESS') {
+            this.$store.commit("SET_USER", 
+    {
+      id: '',
+      username: response.data.username,
+      name: '',
+      address: '',
+      city: '',
+      stateCode: '',
+      ZIP: ''
+    });
             this.$router.push("/");
           }
-          if(response.loginResponseDto.loginResult.equals('BAD_PASSWORD')) {
+          if(response.data.loginResult == 'BAD_PASSWORD') {
             response = "Invalid Password!"
           }
 
@@ -166,4 +175,4 @@ export default {
 
 <style scoped>
 
-</style> -->
+</style> 

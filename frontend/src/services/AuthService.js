@@ -11,7 +11,7 @@ export default {
   },
 
   authenticateUser(loginDto) {
-    return axios.post('/api/authentication', loginDto)
+    return axios.post('/api/authenticate', loginDto)
   }
 
 }

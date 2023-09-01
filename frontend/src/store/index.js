@@ -1,20 +1,17 @@
-import { createStore } from 'vuex';
-import VuexPersistance from 'vuex-persist';
+import Vue from 'vue'
+import Vuex from 'vuex'
+Vue.use(Vuex)
 
-const vuexLocal = new VuexPersistance({
-  storage: window.localStorage
-});
-
-export default createStore({
+export default new Vuex.Store({
   state: {
-    user : {
-    id: '',
-    username: '',
-    name: '',
-    address: '',
-    city: '',
-    stateCode: '',
-    ZIP: ''
+      user : {
+      id: '',
+      username: '',
+      name: '',
+      address: '',
+      city: '',
+      stateCode: '',
+      ZIP: ''
     },
     loginDto : {
       username: '',
@@ -27,7 +24,6 @@ export default createStore({
     },
    
   },
-  plugins: [vuexLocal.plugin]
 })
 
 
