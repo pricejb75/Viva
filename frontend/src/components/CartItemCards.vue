@@ -1,9 +1,9 @@
-<!-- <template>
+<template>
 
     <div id="cart-item-cards">
 
 
-        <div v-for="cartItem in cartItems" v-bind:key="cartItem.cartItemId" class="cartItem-card">
+        <div v-for="cartItem in cartItems" :key="cartItem.cartItemId" class="cartItem-card">
 
             <router-link :to="{ name : 'product', params: {id : cartItem.productId}}">
 
@@ -49,18 +49,13 @@
             pictures: []
         }
     },
-    name: "ProductCards",
+    name: "CartItemCards",
     components: {
       
     },
     methods: {
         isAuthenticated() {
             return this.$store.state.user.username !== "";
-        },
-        addToCart() {
-            CartService.addCartItem(this.product).then(response => {
-                console.log("Item Was Added To Cart!", response);
-            });
         },
         removeFromCart() {
             if(cartItem.quantity > 1) {
@@ -80,7 +75,12 @@
     created() {
         PictureService.getAllPictures().then(response => {
             this.pictures = response.data;
+
+            
         })
+
+
+
     }
 
 }
@@ -88,4 +88,4 @@
     
     <style scoped>
     
-    </style> -->
+    </style>

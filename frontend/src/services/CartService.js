@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 export default {
-    addCartItem(product) {
-        const item = {
-            quantity: 1,
-            productId: product.productId
-        };
-        return axios.post('/cart/items', item);
+    addCartItem(cartItem) {
+        // const item = {
+        //     quantity: 1,
+        //     productId: product.productId
+        // };
+        return axios.post('/api/cart/items', cartItem);
     },
 
     getCartItems() {

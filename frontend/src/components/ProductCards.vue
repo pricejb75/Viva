@@ -21,9 +21,9 @@
             </router-link>
 
 
-             <!-- <div class="add-to-cart" v-if="isAuthenticated()">
-                    <button @click="addToCart(product)" title="add-to-cart">Add To Cart 🛒</button>
-            </div>   -->
+            <div class="add-to-cart" v-if="isAuthenticated()">
+                    <button @click="addToCart(this.cartItem)" title="add-to-cart">Add To Cart 🛒</button>
+            </div>   
         </div>
 
 
@@ -38,20 +38,26 @@
     export default {
         data() {
         return {
-            pictures: []
+            pictures: [],
+            cartItem: {
+                quantity:1,
+                productId: this.product.id,
+                userId: this.$store.state.user.id, 
+                product: this.product
+            }
         }
     },
     name: "ProductCards",
     components: {
-        // PictureService,
-        // CartService
+    //     PictureService,
+    // CartService
     },
     methods: {
         isAuthenticated() {
             return this.$store.state.user.username !== "";
         },
         addToCart() {
-            CartService.addCartItem(this.product).then(response => {
+            CartService.addCartItem(this.cartItem).then(response => {
                 console.log("Item Was Added To Cart!", response);
             });
         },

@@ -149,7 +149,7 @@ export default {
           if (response.data.loginResult == 'SUCCESS') {
             this.$store.commit("SET_USER", 
     {
-      id: '',
+      id: response.data.id,
       username: response.data.username,
       name: '',
       address: '',

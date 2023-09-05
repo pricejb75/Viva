@@ -9,7 +9,8 @@ import Country from '../views/Country.vue';
 import Product from '../views/Product.vue';
 import Cart from '../views/Cart.vue';
 import Login from '../views/Login.vue';
-import Register from '../views/Register.vue'
+import Register from '../views/Register.vue';
+import Checkout from '../views/Checkout.vue';
 
 // Here we're specifying that VUE should use VUE router
 
@@ -38,7 +39,8 @@ const routes = [
     {path: '/product/:id', component: Product, name: 'product'},
     {path: '/cart', component: Cart, name: 'cart'},
     {path: '/login', component: Login, name: 'login'},
-    {path: '/register', component: Register, name: 'register'}
+    {path: '/register', component: Register, name: 'register'},
+    {path: '/checkout', component: Checkout, name: 'checkout'}
   ];
   
 
