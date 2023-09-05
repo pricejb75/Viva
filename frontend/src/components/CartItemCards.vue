@@ -58,10 +58,10 @@
             return this.$store.state.user.username !== "";
         },
         removeFromCart() {
-            if(cartItem.quantity > 1) {
-                cartItem.quantity -= cartItem.quantity;
+            if(this.cartItem.quantity > 1) {
+                this.cartItem.quantity -= this.cartItem.quantity;
             }
-            CartService.removeCartItem(id).then(response => {
+            CartService.removeCartItem(this.cartItem.cartItemId).then(response => {
                 console.log("Item was removed from cart", response);
             })
         },

@@ -155,7 +155,10 @@
 
 
 <script>
+ import TaxService from '../services/TaxService.js';
+ import CartService from "../services/CartService";
   export default {
+    
     name: "Checkout",
 
     data() {
