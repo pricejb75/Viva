@@ -93,6 +93,7 @@ footer{
     font-size: 1.3em;
     opacity: 0.7;
     transition: 0.5s;
+    font-family: sans-serif;
 }
 
 .footer_nav ul li a:hover {

@@ -92,7 +92,7 @@
 
       <div id="fields">
 
-        <label for="username">Username</label>
+        <label for="username">Username : </label>
 
           <input
             type="text"
@@ -103,7 +103,7 @@
             autofocus
           />
 
-          <label for="password">Password</label>
+          <label for="password">Password : </label>
 
           <input
             type="password"

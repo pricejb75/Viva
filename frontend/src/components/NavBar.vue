@@ -80,6 +80,7 @@ body {
 
 .menu li a {
   color: black;
+  font-family: sans-serif;
   text-decoration: none;
   display: block;
   padding: 40px 25px;

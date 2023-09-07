@@ -4,10 +4,11 @@
     <section id="top-section">
 
       <p id="login-message" v-if="!isLoggedIn">
-        Welcome! You may browse anonymously as much as you wish,<br />
+        Welcome! You may browse anonymously 
+        as much as you wish,<br />
         but you must
-        <router-link v-bind:to="{ name: 'login' }" id="login">Login</router-link> to add
-        items to your shopping cart.
+        <router-link v-bind:to="{ name: 'login' }" id="login">Login</router-link> 
+        to add items to your shopping cart.
       </p>
   
       <input type="text" 

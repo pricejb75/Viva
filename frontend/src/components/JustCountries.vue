@@ -2,7 +2,25 @@
 
     <div>
 
-        <input type="text" @keyup="getCountriesByName" v-model="countryName" > 
+
+        <section id="top-section">
+
+            <p id="login-message" v-if="!isLoggedIn">
+            Welcome! You may browse anonymously 
+            as much as you wish,<br />
+            but you must
+            <router-link v-bind:to="{ name: 'login' }" id="login">Login</router-link> 
+            to add items to your shopping cart.
+            </p>
+
+            <input type="text" 
+            placeholder=" 🔎 search..."  
+            @keyup="getCountriesByName" 
+            v-model="countryName"
+            id="search" > 
+
+        </section>
+
 
     <ul id="country-names">
         <router-link :to="{ name : 'country', params: {id : country.id}}" v-for="country in filteredCountries" v-bind:key="country.id">
@@ -85,7 +103,7 @@ router-link {
     list-style: none;
     font-size: 3em;
     padding: 20px;
-     font-family: 'sans-serif';
+     font-family: sans-serif;
      cursor: pointer;
      box-sizing: border-box;
      transition: 0.5s;
@@ -118,7 +136,50 @@ router-link {
 }
 
 
+#top-section {
 
+padding-left: 40px;
+display:flex;
+align-items: center;
+justify-content: space-between;
+
+
+}
+
+#search {
+    
+   
+    border: solid black;
+    font-size: 17px;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.40);
+    border-radius:10px;
+    font-family: 'Open Sans';
+    font-size: 1.0 rem;
+    height: 40px;
+    grid-area:search;
+    margin-right:3vw;
+    
+}
+
+#login-message {
+
+    color:black;
+    padding-bottom: 3vh;
+    padding-top: 3vh;
+    font-size: 1.2rem;
+
+}
+
+#login {
+  color : rgb(138, 32, 32);
+  font-size: 1.4rem;
+  font-style: italic;
+  
+}
+
+#login:hover {
+  color:rgb(215, 150, 9);
+}
 
 
 

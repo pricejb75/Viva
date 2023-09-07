@@ -39,7 +39,7 @@ export default {
 
 <style scoped>
     li,h1,h2,h3,p {
-        font-family: 'Open Sans', sans-serif; 
+        font-family: sans-serif; 
         color: white;
     }
 
@@ -108,7 +108,7 @@ export default {
     border-radius:10px;
     text-align: center;
     grid-area:text;
-    font-family: 'Open Sans';
+    font-family: sans-serif;
     color:black;
     padding: 15px 25px;
     text-decoration: none;

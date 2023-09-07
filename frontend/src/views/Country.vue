@@ -1,14 +1,8 @@
 <template>
   <div>
-      <!-- <p id="login-message" v-if="!isLoggedIn">
-        Welcome! You may browse anonymously as much as you wish,<br />
-        but you must
-        <router-link v-bind:to="{ name: 'login' }">Login</router-link> to add
-        items to your shopping cart.
-      </p> -->
-  
-      <input type="text" @keyup="getProductsByName" v-model="productName" > 
-  
+
+      <h1 id="country_name">{{ country.name }}</h1>
+
       <product-cards :products="products"/>
   
     </div>
@@ -17,6 +11,7 @@
 <script>
   import ProductService from "../services/ProductService.js";
   import ProductCards from "../components/ProductCards.vue";
+import CountryService from "../services/CountryService";
 export default {
     name: "ProductsByCountry",
         components: {
@@ -26,13 +21,14 @@ export default {
         return {
             products: [],
             productName: '',
-            filteredProducts: []
+            filteredProducts: [],
+            country:{}
         }
     },
     computed: {
-      // isLoggedIn() {
-      //   return this.$store.state.user.username != "";
-      // },
+      isLoggedIn() {
+        return this.$store.state.user.username != "";
+      },
     },
     methods: {
         getProductsByName(name){
@@ -40,19 +36,32 @@ export default {
             this.filteredProducts = this.products.filter(p => {
               return p.name.toLowerCase().includes(name);
             })
-          
         }
+  
     },
     created() {
         ProductService.getProductsByCountryId(this.$route.params.id).then(response => {
             this.products = response.data;
             this.filteredProducts = this.products;
-        })
-    }
+        }),
+       
+          CountryService.getCountryById(this.$route.params.id).then(response => {
+            this.country = response.data;
+          })
+        }
+    
 };
 </script>
 
 <style scoped>
 
+#country_name {
+  color : rgb(138, 32, 32);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-style: italic;
+  font-size: 2.4rem;
+  
+}
 
 </style>
