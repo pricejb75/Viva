@@ -48,6 +48,11 @@ export default {
 
     },
 
+    getProducts(){
+        let path = '/api/products/';
+        return axios.get(path);
+    },
+
     getDrinks(){
         return axios.get('http://localhost:8081/api/products?type=2');
     },

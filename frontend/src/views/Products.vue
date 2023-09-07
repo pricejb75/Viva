@@ -1,15 +1,23 @@
 <template>
 <div>
-    <!-- <p id="login-message" v-if="!isLoggedIn">
+  <section id="top-section">
+
+    <p id="login-message" v-if="!isLoggedIn">
       Welcome! You may browse anonymously as much as you wish,<br />
       but you must
-      <router-link v-bind:to="{ name: 'login' }">Login</router-link> to add
+      <router-link v-bind:to="{ name: 'login' }" id="login">Login</router-link> to add
       items to your shopping cart.
-    </p> -->
+    </p>
 
-    <input type="text" @keyup="getProductsByName" v-model="productName" > 
+    <input type="text" 
+    placeholder=" 🔎 search..."  
+    @keyup="getProductsByName" 
+    v-model="productName"
+    id="search" > 
 
-    <product-cards :products="products"/>
+  </section>
+
+    <product-cards :products="filteredProducts"/>
 
   </div>
 
@@ -26,36 +34,81 @@ export default {
   data() {
     return {
       products: [],
-      productName : ''
+      productName : '',
+      filteredProducts: []
     };
 
   },
 
   computed: {
-    // isLoggedIn() {
-    //   return this.$store.state.user.username != '';
-    // },
+    isLoggedIn() {
+      return this.$store.state.user.username != "";
+    },
   },
 
   methods: {
 
     getProductsByName(name){
           name = this.productName.toLowerCase();
-          let filteredProducts = this.products.filter(p => {
-            return p.name.toLowerCase.includes(name);
+          this.filteredProducts = this.products.filter(p => {
+            return p.name.toLowerCase().includes(name);
           })
-          this.products = filteredProducts;
+          // this.products = filteredProducts;
       }
   },
 
   created() {
     ProductService.getAllProducts({}).then(response => {
       this.products = response.data;
+        this.filteredProducts = this.products;
     })
   },
 };
 </script>
 
-<style>
+<style scoped>
+#top-section {
 
+padding-left: 40px;
+display:flex;
+align-items: center;
+justify-content: space-between;
+
+
+}
+
+#search {
+    
+   
+    border: solid black;
+    font-size: 17px;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.40);
+    border-radius:10px;
+    font-family: 'Open Sans';
+    font-size: 1.0 rem;
+    height: 40px;
+    grid-area:search;
+    margin-right:3vw;
+    
+}
+
+#login-message {
+
+    color:black;
+    padding-bottom: 3vh;
+    padding-top: 3vh;
+    font-size: 1.2rem;
+
+}
+
+#login {
+  color : rgb(138, 32, 32);
+  font-size: 1.4rem;
+  font-style: italic;
+  
+}
+
+#login:hover {
+  color:rgb(215, 150, 9);
+}
 </style>
