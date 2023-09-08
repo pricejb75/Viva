@@ -73,6 +73,13 @@ public class JdbcCartItemDao implements CartItemDao{
     }
 
     @Override
+    public void delete(int cartItemId) {
+        // Make sure the item noted is actually the user's
+        String sql = "DELETE FROM cart_item WHERE cart_item_id = ?";
+        jdbcTemplate.update(sql, cartItemId);
+    }
+
+    @Override
     public void clearItemsByUserId(int userId) {
         String sql = "DELETE FROM cart_item WHERE user_id = ?";
         jdbcTemplate.update(sql, userId);

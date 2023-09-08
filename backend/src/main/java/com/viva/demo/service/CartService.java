@@ -30,8 +30,8 @@ public class CartService {
     }
 
 
-    public Cart getUserCart(Principal principal) {
-        User user = getUser(principal);
+    public Cart getUserCart(String username) {
+        User user = userDao.findByUsername(username);
         int userId =  user.getId();
 
         // Get the list of items in the user's cart
@@ -55,8 +55,7 @@ public class CartService {
         return cart;
     }
 
-    public void clearCart(Principal principal) {
-        int userId = getUserId(principal);
+    public void clearCart(int userId) {
         cartItemDao.clearItemsByUserId(userId);
     }
 
@@ -73,33 +72,31 @@ public class CartService {
         return userDao.findByUsername(principal.getName()).getId();
     }
 
-    private User getUser(Principal principal) {
-        return userDao.findByUsername(principal.getName());
-    }
 
-    public CartItem addToCart(Principal principal, CartItem item) {
-        // The only thing we need or use on a new item is product and quantity
-        int userId = getUserId(principal);
-        item.setUserId(userId);
 
+    public CartItem addToCart(CartItem item) {
         // See if it's in the cart
-        CartItem existingItem = cartItemDao.getByProductAndUser(item.getProductId(), userId);
+        CartItem existingItem = cartItemDao.getByProductAndUser(item.getProductId(), item.getUserId());
 
         if (existingItem == null) {
             // Not in the cart yet -- add it
             int newId = cartItemDao.insert(item);
-            return cartItemDao.getById(newId, userId);
+            return cartItemDao.getById(newId, item.getUserId());
         } else {
             // It's in the cart, update the quantity
             existingItem.setQuantity(existingItem.getQuantity() + item.getQuantity());
             cartItemDao.update(existingItem);
-            return cartItemDao.getById(existingItem.getCartItemId(), userId);
+            return cartItemDao.getById(existingItem.getCartItemId(), item.getUserId());
         }
     }
 
-    public void removeFromCart(Principal principal, int itemId) {
-        int userId = getUserId(principal);
-        cartItemDao.delete(itemId, userId);
+    public CartItem updateCartItem(CartItem cartItem) {
+        cartItemDao.update(cartItem);
+        return cartItemDao.getById(cartItem.getCartItemId(), cartItem.getUserId());
+    }
+
+    public void removeFromCart(int cartItemId) {
+        cartItemDao.delete(cartItemId);
     }
 
 

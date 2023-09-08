@@ -22,7 +22,7 @@
 
 
             <div class="add-to-cart" v-if="isAuthenticated()">
-                    <button @click="addToCart(this.cartItem)" title="add-to-cart">Add To Cart 🛒</button>
+                    <button @click="addToCart(product.id)" title="add-to-cart">Add To Cart 🛒</button>
             </div>   
         </div>
 
@@ -38,13 +38,7 @@
     export default {
         data() {
         return {
-            pictures: [],
-            cartItem: {
-                quantity:1,
-                productId: this.product.id,
-                userId: this.$store.state.user.id, 
-                product: this.product
-            }
+            pictures: []
         }
     },
     name: "ProductCards",
@@ -56,8 +50,8 @@
         isAuthenticated() {
             return this.$store.state.user.username !== "";
         },
-        addToCart() {
-            CartService.addCartItem(this.cartItem).then(response => {
+        addToCart(productId) {
+            CartService.addCartItem(productId, 1, this.$store.state.user.id).then(response => {
                 console.log("Item Was Added To Cart!", response);
             });
         },

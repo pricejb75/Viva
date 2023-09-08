@@ -12,15 +12,17 @@
         <h1> Your total is : {{ total }}</h1>
 
       <button @click="checkout()" title="checkout">Checkout</button>
+
+      <button @click="clearCart()" title="clearCart">Clear Cart</button>
     
     </div>
     
     </template>
     
     <script>
-    import CartService from "../services/CartService";
+    import CartService from "../services/CartService.js";
     import CartItemCards from "../components/CartItemCards.vue";
-    import TaxService from '../services/TaxService.js';
+    //import TaxService from '../services/TaxService.js';
 
     export default {
       name: "ProductsView",
@@ -33,8 +35,7 @@
           cartItemName : '',
           filteredCartItems: [],
           stateCode: this.$store.state.user.stateCode,
-          taxRate: 0,
-          total: this.calculateTotal
+          taxRate: 0
         };
     
       },
@@ -42,6 +43,11 @@
       computed: {
         isLoggedIn() {
           return this.$store.state.user.username != "";
+        },
+        total() {
+          return this.cartItems.reduce((acc, val) => {
+              return acc + val.product.price;
+            }, 0).toFixed(2);
         }
   
       },
@@ -56,28 +62,37 @@
               this.cartItems = filteredCartItems;
           },
 
-          calculateTotal() {
-            this.cartItems.forEach((c) => {
-              this.total = this.total + c.product.price;
-            })
-          },
-
           checkout() {
             this.$router.push({name: 'checkout'})
+          },
+
+          refreshPage() {
+            this.$router.push({name: 'cart'})
+          },
+
+          clearCart() {
+            CartService.clearUserCart(this.$store.state.user.id).then(response => {
+              if(response.status == 204) {
+                this.carItems = {}
+              } else {
+                console.log("unalbe to clear cart")
+              }
+            })
+          this.$router.go();
           }
 
 
       },
     
       created() {
-        CartService.getCartItems().then(response => {
-          this.cartItems = response.data;
+        CartService.getCartItems(this.$store.state.user.username).then(response => {
+          this.cartItems = response.data.items;
           this.filteredCartItems = this.cartItems;
-        }),
-
-        TaxService.getTaxRateByStateCode(this.user.stateCode).then(response => {
-          this.taxRate = response.salesTax;
         })
+
+        // TaxService.getTaxRateByStateCode(this.$store.state.user.stateCode).then(response => {
+        //   this.taxRate = response.salesTax;
+        // })
 
         
 

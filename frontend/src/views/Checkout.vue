@@ -155,7 +155,7 @@
 
 
 <script>
- import TaxService from '../services/TaxService.js';
+ //import TaxService from '../services/TaxService.js';
  import CartService from "../services/CartService";
   export default {
     
@@ -192,10 +192,10 @@
     created() {
       CartService.getCartItems().then(response => {
           this.cartItems = response.data;
-        }),
-        TaxService.getTaxRateByStateCode(this.user.stateCode).then(response => {
-          this.taxRate = response.salesTax;
         })
+        // TaxService.getTaxRateByStateCode(this.user.stateCode).then(response => {
+        //   this.taxRate = response.salesTax;
+        // })
     }
 };
 

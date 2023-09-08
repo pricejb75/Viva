@@ -6,8 +6,6 @@ import com.viva.demo.service.CartService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-
 @RestController
 @CrossOrigin
 @RequestMapping("/api/cart")
@@ -20,29 +18,35 @@ public class CartController {
     }
 
     // Get the user's cart
-    @RequestMapping(path = "", method = RequestMethod.GET)
-    public Cart get(Principal principal) {
-        return cartService.getUserCart(principal);
+    @GetMapping("/{username}")
+    public Cart get(@PathVariable String username) {
+        return cartService.getUserCart(username);
     }
 
     // Add an item to the user's cart
-    @RequestMapping(path = "/items", method = RequestMethod.POST)
-    public CartItem addProduct(@RequestBody CartItem item, Principal principal) {
-        return cartService.addToCart(principal, item);
+    @PostMapping("/items")
+    public CartItem addProduct(@RequestBody CartItem item) {
+        return cartService.addToCart(item);
     }
 
     // Remove an item from the user's cart
-    @RequestMapping(path = "/items/{itemId}", method = RequestMethod.DELETE)
+    @DeleteMapping("/items/{cartItemId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void removeProduct(@PathVariable int itemId, Principal principal) {
-        cartService.removeFromCart(principal, itemId);
+    public void removeProduct(@PathVariable int cartItemId) {
+        cartService.removeFromCart(cartItemId);
+    }
+
+    @PutMapping("/items")
+    public CartItem updateCartItem( @RequestBody CartItem cartItem) {
+        return cartService.updateCartItem(cartItem);
     }
 
     // Clear the user's cart
-    @RequestMapping(path = "", method = RequestMethod.DELETE)
+
+    @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void clear(Principal principal) {
-        cartService.clearCart(principal);
+    public void clear(@PathVariable int userId) {
+        cartService.clearCart(userId);
     }
 
 

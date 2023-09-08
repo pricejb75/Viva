@@ -24,11 +24,11 @@
 
 
             <div class="add-another-to-cart" v-if="isAuthenticated()">
-                <button @click="cartItem.quantity++" title="add-to-cart"> Add Another To Cart 🛒 </button>
+                <button @click="addToCart(cartItem.product.id)" title="add-to-cart"> Add Another To Cart 🛒 </button>
             </div>
             
             <div class="remove-one-from-cart" v-if="isAuthenticated()">
-                <button @click="removeFromCart(cartItem.cartItemId)" title="remove-from-cart"> Remove One From Cart 🛒 </button>
+                <button @click="removeFromCart(cartItem.cartItemId, --cartItem.quantity)" title="remove-from-cart"> Remove One From Cart 🛒 </button>
             </div>
             
 
@@ -57,18 +57,21 @@
         isAuthenticated() {
             return this.$store.state.user.username !== "";
         },
-        removeFromCart() {
-            if(this.cartItem.quantity > 1) {
-                this.cartItem.quantity -= this.cartItem.quantity;
-            }
-            CartService.removeCartItem(this.cartItem.cartItemId).then(response => {
+        removeFromCart(cartItemId, quantity) {
+            debugger;
+            CartService.removeCartItem(cartItemId, quantity, this.$store.state.user.id).then(response => {
                 console.log("Item was removed from cart", response);
             })
         },
         getPicturePath(productId) {
             return this.pictures.filter(p => p.productId === productId)[0].filepath;
-        }
+        },
+        addToCart(productId) {
+            CartService.addCartItem(productId, 1, this.$store.state.user.id).then(response => {
+                console.log("Item Was Added To Cart!", response);
+            });
     },
+},
     props: {
         cartItems: []
     },
