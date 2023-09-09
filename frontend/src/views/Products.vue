@@ -17,7 +17,9 @@
 
   </section>
 
+    <section class="container">
     <product-cards :products="filteredProducts"/>
+    </section>
 
   </div>
 
@@ -111,4 +113,27 @@ justify-content: space-between;
 #login:hover {
   color:rgb(215, 150, 9);
 }
+
+
+.container {
+  display:flex;
+  justify-content: center;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </style>

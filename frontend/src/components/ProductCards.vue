@@ -7,23 +7,33 @@
 
             <router-link :to="{ name : 'product', params: {id : product.id}}">
 
-                <div class="product-name action" v-bind:data-id="product.id">
-                    {{ product.name }}
+                <div class="product-name" v-bind:data-id="product.id">
+                  <p>  {{ product.name }} </p>
                 </div>
-
-                <div class="price"> {{ product.price }} </div>
 
                 <div class="product-image-div">
-                    <img height="100" width="100" class="product-image" v-bind:src="getPicturePath(product.id)"/>  
+                    <img  class="product-image" v-bind:src="getPicturePath(product.id)"/>  
                 </div>
+
+
+
 
 
             </router-link>
 
+            <div class="bottom-of-card">
 
-            <div class="add-to-cart" v-if="isAuthenticated()">
-                    <button @click="addToCart(product.id)" title="add-to-cart">Add To Cart 🛒</button>
-            </div>   
+                <div class="price">
+                        <p> {{ product.price }} </p>
+                </div>
+
+                <div class="add-to-cart" v-if="isAuthenticated()">
+                        <button @click="addToCart(product.id)" title="add-to-cart">Add To Cart 🛒</button>
+                </div>   
+
+            </div>
+
+
         </div>
 
 
@@ -74,33 +84,65 @@
     <style scoped>
 
     .product-card {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas:
-        "image image image"
-        "image image image"
-        "image image image"
-        "name name name"
-        "price price ."
-        "button button button";
-        border:solid black;
+
+
+        border:solid rgb(197, 188, 188);
         border-radius:10px;
         margin:10px;
-        width:25vw;
+        width:26vw;
         padding: 10px;
         align-items: center;
         flex-shrink: inherit;
     }
-    
+
+    .product-image {
+    height: 15vw;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area:image;
+    margin: auto;
+    border-radius: 5%;
+    }
+
+    .product-image-div {
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
+
     .product-name {
         grid-area: name;
-        font-family: 'Open Sans';
+        justify-content: center;
+        font-family: sans-serif;
+        
+    }
+
+    .price {
+        grid-area:price;
+        
+    }
+
+    .add-to-cart {
+        grid-area:button;
+    }
+
+    .bottom-of-card {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    /* .product-name {
+        grid-area: name;
+        font-family: sans-serif;
         font-size: 1.0 rem;
-        font-style: italic;
         font-size:15px;
         padding-top: 5px;
         padding-bottom: 5px;
     }
+
+
     
     .product-image-div {
         grid-area: image;
@@ -109,14 +151,18 @@
         padding: 10px;
         border-radius:10px;
         flex-shrink: inherit;
+        
+        height: 200px;
+        width: auto;
       
     }
+
     
     .price {
         grid-area: price;
         display: flex;
         justify-content: flex-end;
-        font-family: 'Open Sans';
+        font-family: sans-serif;
         font-size: 1.0 rem;
         font-size:15px;
     }
@@ -126,7 +172,7 @@
         display: flex;
         padding-top: 5px;
     }
-    
+     */
     
     
     
