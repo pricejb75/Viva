@@ -1,29 +1,34 @@
 <template>
-  <div>
+<div>
 
-    <section id="top-section">
 
-      <p id="login-message" v-if="!isLoggedIn">
-        Welcome! You may browse anonymously 
-        as much as you wish,<br />
-        but you must
-        <router-link v-bind:to="{ name: 'login' }" id="login">Login</router-link> 
-        to add items to your shopping cart.
-      </p>
+
+  <section id="top-section">
+
+    <span></span>
+
+    <input type="text" 
+    placeholder=" 🔎 search..."  
+    @keyup="getProductsByName" 
+    v-model="productName"
+    id="search" > 
+
+  </section>
   
-      <input type="text" 
-      placeholder=" 🔎 search..."  
-      @keyup="getProductsByName" 
-      v-model="productName"
-      id="search" > 
+    <p id="login-message" v-if="!isLoggedIn">
+      Welcome! You may browse anonymously as much as you wish,<br />
+      but you must
+      <router-link v-bind:to="{ name: 'login' }" id="login">Login</router-link> to add
+      items to your shopping cart.
+    </p>
 
+
+    <section class="container">
+    <product-cards :products="filteredProducts" id="product-card"/>
     </section>
 
-
-      <product-cards :products="filteredProducts"/>
-  
   </div>
-  
+
 </template>
   
   <script>
@@ -92,6 +97,7 @@ justify-content: space-between;
     height: 40px;
     grid-area:search;
     margin-right:3vw;
+    margin-bottom: 1vw;
     
 }
 
@@ -99,8 +105,9 @@ justify-content: space-between;
 
     color:black;
     padding-bottom: 3vh;
-    padding-top: 3vh;
+    padding-top: 1vh;
     font-size: 1.2rem;
+    margin-bottom: 3em;
 
 }
 
@@ -113,6 +120,12 @@ justify-content: space-between;
 
 #login:hover {
   color:rgb(215, 150, 9);
+}
+
+#product-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
   
   </style>

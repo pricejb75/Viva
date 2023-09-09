@@ -5,13 +5,7 @@
 
         <section id="top-section">
 
-            <p id="login-message" v-if="!isLoggedIn">
-            Welcome! You may browse anonymously 
-            as much as you wish,<br />
-            but you must
-            <router-link v-bind:to="{ name: 'login' }" id="login">Login</router-link> 
-            to add items to your shopping cart.
-            </p>
+            <span></span>
 
             <input type="text" 
             placeholder=" 🔎 search..."  
@@ -22,11 +16,16 @@
         </section>
 
 
-    <ul id="country-names">
-        <router-link :to="{ name : 'country', params: {id : country.id}}" v-for="country in filteredCountries" v-bind:key="country.id">
-        <li id="country-name" >{{ country.name }}</li>
-        </router-link>
-    </ul>
+        <ul id="country-names">
+
+            <router-link :to="{ name : 'country', params: {id : country.id}}" 
+            v-for="country in filteredCountries" v-bind:key="country.id"
+            id="countries">
+
+            <li id="country-name" >{{ country.name }}</li>
+
+            </router-link>
+        </ul>
 
     </div>
 
@@ -74,14 +73,14 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-
     
 }
 
 #country-names {
     margin: 0;
     padding: 0;
-   
+    display: flex;
+    flex-wrap: wrap;
    
 }
 
@@ -107,14 +106,14 @@ router-link {
      cursor: pointer;
      box-sizing: border-box;
      transition: 0.5s;
-     color: black;
+     color : rgb(138, 32, 32);
      text-decoration: none;
      
 }
 
 #country-name:hover{
-    color:white;
-    background-color: rgb(171, 34, 80);
+    color:rgb(215, 150, 9);
+   
 }
 
 #country-name::before {
@@ -158,6 +157,7 @@ justify-content: space-between;
     height: 40px;
     grid-area:search;
     margin-right:3vw;
+    margin-bottom: 1vw;
     
 }
 
@@ -180,6 +180,7 @@ justify-content: space-between;
 #login:hover {
   color:rgb(215, 150, 9);
 }
+
 
 
 

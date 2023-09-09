@@ -121,6 +121,7 @@
 
     .price {
         grid-area:price;
+        font-family: sans-serif;
         
     }
 
