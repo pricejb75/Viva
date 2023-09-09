@@ -100,7 +100,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    grid-area:image;
     margin: auto;
     border-radius: 5%;
     }
