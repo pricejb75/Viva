@@ -46,8 +46,9 @@
               <button type="submit">Sign in</button></div>
             </div>
 
-        <hr/>
-        Need an account? 
+
+       <p id="need-account"> Need an account?</p> 
+
         <router-link v-bind:to="{ name: 'register' }">Register!</router-link>
 
       </form>
@@ -204,6 +205,7 @@ button {
         padding: 10px;
         font-size: 20px;
         margin-top: 20px;
+        margin-bottom: 20px;
     }
 
     button:hover {
@@ -212,6 +214,27 @@ button {
 
     h2 {
       font-size: 1.2em;
+    }
+
+    #need-account {
+      font-size: 1.5em;
+    }
+
+    a {
+      font-size: 1.5em;
+      text-decoration: none;
+      background-color: rgb(138, 32, 32);
+      text-transform: uppercase;
+      color:white;
+      border-radius: 5px;
+        cursor:pointer;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        padding: 10px;
+        font-size: 20px;
+    }
+
+    a:hover {
+      color: rgb(241, 184, 62);
     }
 
 </style> 
