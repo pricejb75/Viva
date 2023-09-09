@@ -1,22 +1,35 @@
 <template>
-    <div>
+  <section class="container">
+  
+    <div id="logged-in" v-if="isLoggedIn">
 
-      <input type="text" @keyup="getCartItemsByName" v-model="cartItemName"> 
+        <div class="top-section">
+          <h1> Your total is : $ {{ total }}</h1>
+          <button @click="checkout()" title="checkout" id="checkout">Checkout</button>
+        </div>
 
-      <h1> Your total is : {{ total }}</h1>
-
-      <button @click="checkout()" title="checkout">Checkout</button>
-    
         <cartItemCards :cartItems="filteredCartItems"/>
 
-        <h1> Your total is : {{ total }}</h1>
+        <div class="bottom-section">
+          <button @click="clearCart()" title="clearCart" id="clear-cart">Clear Cart</button>
+          <button @click="checkout()" title="checkout" id="checkout">Checkout</button>
+        </div>
 
-      <button @click="checkout()" title="checkout">Checkout</button>
-
-      <button @click="clearCart()" title="clearCart">Clear Cart</button>
-    
     </div>
-    
+
+    <div class="not-logged-in" v-if="!isLoggedIn">
+
+      <p id="message">
+        Welcome! You may browse anonymously as much as you wish,<br />
+        but you must
+        <router-link v-bind:to="{ name: 'login' }" id="login">Login</router-link> to add
+        items to your shopping cart.
+      </p>
+
+    </div>
+
+  </section>
+      
     </template>
     
     <script>
@@ -101,6 +114,65 @@
     };
     </script>
     
-    <style>
+    <style scoped>
+
+    .top-section {
+      display: flex;
+      justify-content: space-between;
+      margin: 2em;
+      padding-right: 15px;
+    }
+
+    .bottom-section {
+      display: flex;
+      justify-content: space-between;
+      margin: 2em;
+      padding-right: 15px;
+    }
+
+    #checkout {
+        font-family: sans-serif;
+        font-weight: bold;
+        background-color: rgb(241, 184, 62);
+        text-transform: uppercase;
+        border-color: rgb(241, 184, 62);
+        color:white;
+        border-radius: 5px;
+        cursor:pointer;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        padding: 10px;
+        font-size: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    #checkout:hover {
+      color: rgb(138, 32, 32);
+    }
+
+    #clear-cart {
+        font-family: sans-serif;
+        font-weight: bold;
+        background-color: rgb(138, 32, 32);
+        text-transform: uppercase;
+        border-color: rgb(138, 32, 32);
+        color:white;
+        border-radius: 5px;
+        cursor:pointer;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        padding: 10px;
+        font-size: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    #clear-cart:hover {
+      color:rgb(241, 184, 62);
+    }
+
+    #message {
+      font-size: 2em;
+      margin-top: 2em;
+    }
     
     </style>
