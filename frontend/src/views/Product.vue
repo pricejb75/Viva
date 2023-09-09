@@ -2,18 +2,37 @@
 
   <section id="container">
 
+
+
     <h1 class="product-name action"> {{ product.name }}</h1>
-    <h2 class="price"> {{ product.price }}</h2>
+
 
     <div class="product-image-div">
         <img height="100" width="100" class="product-image" :src="'http://localhost:8081/images' + picture.filepath"/>  
     </div>
 
     <h3 class="description">{{ product.description }}</h3>
-    <div class="add-to-cart">
-        <button @click="addToCart" title="add-to-cart">Add To Cart 🛒</button>
+
+    <div class="bottom-section">
+
+        <h2 class="price">$ {{ product.price }}</h2>
+
+
     </div>
 
+    <p id="login-message" v-if="!isLoggedIn">
+      Welcome! You may browse anonymously as much as you wish,<br />
+      but you must
+      <router-link v-bind:to="{ name: 'login' }" id="login">Login</router-link> to add
+      items to your shopping cart.
+    </p>
+
+
+    <div class="add-to-cart" v-if="isAuthenticated()">
+            <button @click="addToCart(product.id)"
+             title="add-to-cart">Add To Cart</button>
+        </div>
+    
   </section>
 
 </template>
@@ -31,6 +50,14 @@ export default {
 
         }
     },
+
+          computed: {
+        isLoggedIn() {
+          return this.$store.state.user.username != "";
+        },
+      },
+
+
     methods: {
          getProduct() {
             ProductService.getProductByProductId(this.$route.params.id).then(response => {
@@ -38,12 +65,13 @@ export default {
             })
         },
 
-             // isAuthenticated() {
-        //     return this.$store.state.user.username !== "";
-        // },
+        isAuthenticated() {
+            return this.$store.state.user.username !== "";
+        },
 
-        addToCart() {
-            CartService.addCartItem(this.product).then(response => {
+
+        addToCart(productId) {
+            CartService.addCartItem(productId, 1, this.$store.state.user.id).then(response => {
                 console.log("Item Was Added To Cart!", response);
             });
         },
@@ -65,68 +93,54 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 
-#container {
-
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas:
-    "name name name"
-    "image image description"
-    "image image description"
-    "image image description"
-    "price . button";
-
-}
 
 .product-name {
-    grid-area: name;
-    font-family: 'Open Sans';
-    font-size: 1.0 rem;
-    font-style: italic;
-    font-size:15px;
+
+    font-family: sans-serif;
+    font-size:35px;
     padding-top: 5px;
     padding-bottom: 5px;
     color: black;
-    font-family: 'sans-serif';
 }
 
 .description {
-    grid-area: description;
-    font-family: 'Open Sans';
-    font-size: 1.0 rem;
-    font-size:15px;
+    font-family: sans-serif;
+    font-size:20px;
     padding-top: 5px;
     padding-bottom: 5px;
     color: black;
 }
 
 .product-image-div {
-    grid-area: image;
-    display: flex;
+
     justify-content: center;
     padding: 10px;
-    border-radius:10px;
-    flex-shrink: inherit;
+    border-radius:5%;
+
   
 }
 
+img {
+    width:40%;
+    height: auto;
+}
+
 .price {
-    grid-area: price;
-    display: flex;
-    justify-content: flex-end;
-    font-family: 'Open Sans';
-    font-size: 1.0 rem;
-    font-size:15px;
+
+    font-family: sans-serif;
+    font-size:25px;
     color: black;
-    font-family: 'sans-serif';
+    justify-content: center;
 }
 
 .add-to-cart {
-    grid-area:cart;
     display: flex;
     padding-top: 5px;
+    border-radius: 5px;
+    justify-content: center;
+    font-size: 20px;
 }
 
 
@@ -150,6 +164,41 @@ router-link {
 
 
 
+button {
+        font-family: sans-serif;
+        font-weight: bold;
+        background-color: rgb(241, 184, 62);
+        text-transform: uppercase;
+        border-color: rgb(241, 184, 62);
+        color:white;
+        border-radius: 5px;
+        cursor:pointer;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        padding: 10px;
+        font-size: 20px;
+    }
+
+    button:hover {
+        color: rgb(138, 32, 32);
+    }
+
+    #login-message {
+
+        color:black;
+        padding-bottom: 3vh;
+
+        font-size: 1.2rem;
+        margin-bottom: 3em;
+        margin-top: 3em;
+
+    }
+
+        #login {
+        color : rgb(138, 32, 32);
+        font-size: 1.4rem;
+        font-style: italic;
+
+    }
 
 
 

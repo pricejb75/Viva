@@ -81,6 +81,8 @@ body {
     padding: 0;
     display: flex;
     flex-wrap: wrap;
+    margin-left: 4vw;
+    margin-right: 4vw;
    
 }
 

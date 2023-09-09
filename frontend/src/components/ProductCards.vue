@@ -24,11 +24,11 @@
             <div class="bottom-of-card">
 
                 <div class="price">
-                        <p> {{ product.price }} </p>
+                        <p>$ {{ product.price }} </p>
                 </div>
 
                 <div class="add-to-cart" v-if="isAuthenticated()">
-                        <button @click="addToCart(product.id)" title="add-to-cart">Add To Cart 🛒</button>
+                        <button @click="addToCart(product.id)" title="add-to-cart">Add To Cart</button>
                 </div>   
 
             </div>
@@ -84,8 +84,6 @@
     <style scoped>
 
     .product-card {
-
-
         border:solid rgb(197, 188, 188);
         border-radius:10px;
         margin:10px;
@@ -93,6 +91,7 @@
         padding: 10px;
         align-items: center;
         flex-shrink: inherit;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     .product-image {
@@ -113,67 +112,52 @@
     }
 
     .product-name {
-        grid-area: name;
         justify-content: center;
         font-family: sans-serif;
-        
+        font-size: 20px;
+        color:black;
+    }
+
+    a {
+        text-decoration: none;
     }
 
     .price {
-        grid-area:price;
+   
         font-family: sans-serif;
+        font-size: 1.2em;
         
-    }
-
-    .add-to-cart {
-        grid-area:button;
     }
 
     .bottom-of-card {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        margin-top: 5px;
+        margin-bottom:none;
     }
-    
-    /* .product-name {
-        grid-area: name;
+
+ button {
         font-family: sans-serif;
-        font-size: 1.0 rem;
-        font-size:15px;
-        padding-top: 5px;
-        padding-bottom: 5px;
+        font-weight: bold;
+        background-color: rgb(241, 184, 62);
+        text-transform: uppercase;
+        border-color: rgb(241, 184, 62);
+        color:white;
+        border-radius: 5px;
+        cursor:pointer;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        padding:10px;
+       
     }
 
+    button:hover {
+        background-color: rgb(138, 32, 32);
+        color: rgb(241, 184, 62);
+        border-color: rgb(138, 32, 32);
+    }
+    
 
-    
-    .product-image-div {
-        grid-area: image;
-        display: flex;
-        justify-content: center;
-        padding: 10px;
-        border-radius:10px;
-        flex-shrink: inherit;
-        
-        height: 200px;
-        width: auto;
-      
-    }
-
-    
-    .price {
-        grid-area: price;
-        display: flex;
-        justify-content: flex-end;
-        font-family: sans-serif;
-        font-size: 1.0 rem;
-        font-size:15px;
-    }
-    
-    .add-to-cart {
-        grid-area:cart;
-        display: flex;
-        padding-top: 5px;
-    }
-     */
     
     
     
