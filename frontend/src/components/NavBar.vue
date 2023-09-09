@@ -12,7 +12,11 @@
         <li><router-link v-bind:to="{ name : 'home'}">Home</router-link></li>
         <li><router-link :to="{ name : 'products'}">Products</router-link></li>
         <li><router-link :to="{ name : 'cart'}">Cart</router-link></li>
-        <li><router-link :to="{ name : 'login'}">Log In</router-link></li>
+
+        <li >
+          <router-link :to="{ name : 'login'}">Log In</router-link>
+        </li>
+
       </ul>
     </div>
   </header>

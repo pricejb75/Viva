@@ -1,131 +1,85 @@
-<!-- <template>
-    <div id="login">
+<template>
 
-      <form v-on:submit.prevent="login">
+  <section id="main-section">
 
-        <h1>Please Sign In</h1>
+    <div id="login" v-if="!isLoggedIn">
+
+      <div id="display-box">{{ response }}</div>
+
+      <form v-on:submit.prevent="authenticateUser">
+
+        <h1 id="sign-in-message">Please Sign In</h1>
+
+        <h2>
+          Username : ExampleUser1
+        </h2>
+        <h2>
+          Password : password
+        </h2>
 
         <div id="fields">
 
-          <label for="username">Username</label>
+          <label for="username">Username : </label>
 
-          <input
-            type="text"
-            id="username"
-            placeholder="Username"
-            v-model="loginDto.username"
-            required
-            autofocus
-          />
+            <input
+              type="text"
+              id="username"
+              placeholder="Username"
+              v-model="loginDto.username"
+              required
+              autofocus
+            />
 
-          <label for="password">Password</label>
+            <br>
 
-          <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            v-model="user.password"
-            required
-          />
+            <label for="password">Password : </label>
 
-          <div>
-            <button type="submit">Sign in</button></div>
-          </div>
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              v-model="loginDto.password"
+              required
+            />
+
+            <div>
+              <button type="submit">Sign in</button></div>
+            </div>
+
         <hr/>
-        Need an account? <router-link v-bind:to="{ name: 'register' }">Register!</router-link>
+        Need an account? 
+        <router-link v-bind:to="{ name: 'register' }">Register!</router-link>
+
       </form>
+
+
     </div>
-  </template>
-  
-  <script>
-  import authService from "../services/AuthService";
-  
-  export default {
-    name: "LoginView",
-    data() {
-      return {
-        loginDto : {
-          username: "",
-          password: "",
-        },
-      };
-    },
-    methods: {
-      login() {
-        authService
-          .login(this.user)
-          .then((response) => {
-            if (response.status == 200) {
-              this.$store.commit("SET_AUTH_TOKEN", response.data.token);
-              this.$store.commit("SET_USER", response.data.user);
-              this.$router.push("/");
-            }
-          })
-          .catch((error) => {
-            const response = error.response;
-            if (!response) {
-              alert(error);
-            } else if (response.status === 401) {
-              alert("Invalid username and password!");
-            } else {
-              alert(response.message);
-            }
-          });
-      },
-    },
-  };
-  </script>
-  
-  <style scoped>
-  
-  </style> -->
 
- <template>
+    <div id="logged-in" v-if="isLoggedIn">
 
-  <div id="login">
+      <h1 id="message">
+        You're Currently logged in as : {{ this.$store.state.user.username }}
+      </h1>
 
-    <div id="display-box">{{ response }}</div>
-
-    <form v-on:submit.prevent="authenticateUser">
-
-      <h1>Please Sign In</h1>
-
-      <div id="fields">
-
-        <label for="username">Username : </label>
-
-          <input
-            type="text"
-            id="username"
-            placeholder="Username"
-            v-model="loginDto.username"
-            required
-            autofocus
-          />
-
-          <label for="password">Password : </label>
-
-          <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            v-model="loginDto.password"
-            required
-          />
-
-          <div>
-            <button type="submit">Sign in</button></div>
-          </div>
-
-      <hr/>
-      Need an account? 
-      <router-link v-bind:to="{ name: 'register' }">Register!</router-link>
-
-    </form>
+      <button @click="logout()" title="logout">
+        Logout
+      </button>
 
 
-  </div>
+
+
+    </div>
+
+  </section>
 </template>
+
+
+
+
+
+
+
+
 
 <script>
 import authService from "../services/AuthService";
@@ -141,6 +95,11 @@ export default {
       response: ''
     };
   },
+  computed: {
+        isLoggedIn() {
+          return this.$store.state.user.username != "";
+        }
+      },
   methods: {
     authenticateUser() {
       authService
@@ -169,10 +128,90 @@ export default {
         })
      
     },
+    logout() {
+      if(this.$store.state.user.username != "") {
+        this.$store.commit("SET_USER", 
+        {
+      id: '',
+      username: '',
+      name: '',
+      address: '',
+      city: '',
+      stateCode: '',
+      ZIP: ''
+        })
+      }
+      this.$router.push("/");
+    },
+
+
+    isAuthenticated() {
+            return this.$store.state.user.username !== "";
+        }
+
   },
 };
 </script>
 
 <style scoped>
+
+#username {
+  border: solid black;
+    font-size: 17px;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.40);
+    border-radius:10px;
+    font-family: sans-serif;
+    font-size: 1.0 rem;
+    height: 40px;
+    margin-right:3vw;
+    margin-bottom: 1vw;
+    align-items: center;
+}
+
+#password {
+  border: solid black;
+    font-size: 17px;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.40);
+    border-radius:10px;
+    font-family: sans-serif;
+    font-size: 1.0 rem;
+    height: 40px;
+    margin-right:3vw;
+    margin-bottom: 1vw;
+    align-items: center;
+}
+
+#sign-in-message {
+  font-size: 2em;
+  margin-bottom: 1.5em;
+}
+
+label {
+  font-size: 1.4em;
+  padding: 10px;
+}
+
+button {
+        font-family: sans-serif;
+        font-weight: bold;
+        background-color: rgb(241, 184, 62);
+        text-transform: uppercase;
+        border-color: rgb(241, 184, 62);
+        color:white;
+        border-radius: 5px;
+        cursor:pointer;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        padding: 10px;
+        font-size: 20px;
+        margin-top: 20px;
+    }
+
+    button:hover {
+        color: rgb(138, 32, 32);
+    }
+
+    h2 {
+      font-size: 1.2em;
+    }
 
 </style> 

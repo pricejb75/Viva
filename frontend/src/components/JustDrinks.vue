@@ -92,10 +92,9 @@ justify-content: space-between;
     font-size: 17px;
     box-shadow:0 0 15px 4px rgba(0,0,0,0.40);
     border-radius:10px;
-    font-family: 'Open Sans';
+    font-family: sans-serif;
     font-size: 1.0 rem;
     height: 40px;
-    grid-area:search;
     margin-right:3vw;
     margin-bottom: 1vw;
     
