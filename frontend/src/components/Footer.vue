@@ -5,16 +5,14 @@
             <a href=""><i class="fa-brands fa-facebook"></i></a>
             <a href=""><i class="fa-brands fa-instagram"></i></a>
             <a href=""><i class="fa-brands fa-twitter"></i></a>
-            <a href=""><i class="fa-brands fa-google-plus"></i></a>
             <a href=""><i class="fa-brands fa-youtube"></i></a>
         </div>
 
         <div class="footer_nav">
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">Cart</a></li>
-                <li><a href="">Login</a></li>
-                <li><a href="">Contact Us</a></li>
+            <li><router-link v-bind:to="{ name : 'home'}">Home</router-link></li>
+            <li><router-link :to="{ name : 'products'}">Products</router-link></li>
+            <li><router-link :to="{ name : 'cart'}">Cart</router-link></li>
             </ul>
         </div>
 
