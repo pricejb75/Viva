@@ -2,7 +2,10 @@
     <main id="flight-confirm-main">
       <div id="confirm-container">
         <h2 id="message">
-          Thank you! Your Order Has Been Placed. Your confirmation code is:
+          Thank you! <br> <br>
+           Your Order Has Been Placed. <br>
+          Your order details have been sent to you via email. <br> <br>
+          Your confirmation code is:
         </h2>
         <h2 id="confirm-code">{{ confirmationCode }}</h2>
       </div>

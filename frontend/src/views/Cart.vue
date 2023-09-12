@@ -76,7 +76,7 @@
           },
 
           checkout() {
-            this.$router.push({name: 'checkout'})
+            this.$router.push({name: 'confirmation'})
           },
 
           refreshPage() {
@@ -88,7 +88,7 @@
               if(response.status == 204) {
                 this.carItems = {}
               } else {
-                console.log("unalbe to clear cart")
+                console.log("unable to clear cart")
               }
             })
           this.$router.go();

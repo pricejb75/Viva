@@ -62,6 +62,7 @@
         },
         addToCart(productId) {
             CartService.addCartItem(productId, 1, this.$store.state.user.id).then(response => {
+                window.alert("Item was added to cart!");
                 console.log("Item Was Added To Cart!", response);
             });
         },

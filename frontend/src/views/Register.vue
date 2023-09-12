@@ -3,7 +3,7 @@
       <form v-on:submit.prevent="register">
         <h1>Create Account</h1>
         <div id="fields">
-          <label for="username">Username</label>
+          <label for="username">Username :</label>
           <input
             type="text"
             id="username"
@@ -12,7 +12,8 @@
             required
             autofocus
           />
-          <label for="name">Name</label>
+    <br>
+          <label for="name">Name :</label>
           <input
             type="text"
             id="name"
@@ -20,7 +21,8 @@
             v-model="user.name"
             required
           />
-          <label for="password">Password</label>
+          <br>
+          <label for="password">Password :</label>
           <input
             type="password"
             id="password"
@@ -28,7 +30,8 @@
             v-model="user.password"
             required
           />
-          <label for="confirmPassword">Confirm password</label>
+       <br>
+          <label for="confirmPassword">Confirm password :</label>
           <input
             type="password"
             id="confirmPassword"
@@ -36,18 +39,19 @@
             v-model="user.confirmPassword"
             required
           />
-  
-          <label for="address">Address</label>
+            <br>
+          <label for="address">Address :</label>
           <input
             type="text"
             id="address"
             placeholder="Address"
             v-model="user.address"
           />
+          <br>
   
-          <label for="city">City</label>
+          <label for="city">City :</label>
           <input type="text" id="city" placeholder="City" v-model="user.city" />
-  
+          <br>
           <label for="state">State</label>
           <input
             type="text"
@@ -57,8 +61,9 @@
             maxlength="2"
             required
           />
+          <br>
   
-          <label for="zip">ZIP</label>
+          <label for="zip">ZIP :</label>
           <input
             type="number"
             id="zip"
@@ -68,7 +73,8 @@
             minlength="5"
             maxlength="5"
           />
-          <div></div>
+          <br>
+          <!-- <div></div> -->
           <div>
             <button type="submit">Create Account</button>
           </div>
@@ -147,4 +153,53 @@
   </script>
   
   <style scoped>
+
+  input {
+    border: solid black;
+    font-size: 17px;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.40);
+    border-radius:10px;
+    font-family: sans-serif;
+    font-size: 1.0 rem;
+    height: 40px;
+    margin-right:3vw;
+    margin-bottom: 1vw;
+    align-items: center;
+  }
+
+  label {
+    font-size: 1.4em;
+    padding:10px;
+  }
+
+  #register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h1{
+    text-align: center;
+  }
+  button {
+        font-family: sans-serif;
+        font-weight: bold;
+        background-color: rgb(241, 184, 62);
+        text-transform: uppercase;
+        border-color: rgb(241, 184, 62);
+        color:white;
+        border-radius: 5px;
+        cursor:pointer;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        padding: 10px;
+        font-size: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    button:hover {
+        color: rgb(138, 32, 32);
+    }
+
+
   </style>
